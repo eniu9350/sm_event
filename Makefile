@@ -1,4 +1,4 @@
 CC = gcc
 
 test:
-	$(CC) -lpthread test.c
+	$(CC) -lpthread demul_epoll.c master.c test.c
