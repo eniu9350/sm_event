@@ -1,8 +1,15 @@
 #include "thread.h"
 #include "demul.h"
+#include "master.h"
 
 int main()
 {
-	cq c;
+	conn_queue c;
 	master_main();
+
+
+	// start main thread
+	
+	
+	
 }

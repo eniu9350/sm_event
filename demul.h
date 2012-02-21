@@ -3,7 +3,8 @@
 
 int demul_init(int size);
 
-void demul_poll(int demulfd, void* events, int maxevents, int timeout);
+//mmm: return value meaning unified?
+int demul_poll(int demulfd, void* events, int maxevents, int timeout);
 
 int demul_add_event(int demulfd, int fd, int mask);
 
