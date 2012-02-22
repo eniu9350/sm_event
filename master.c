@@ -2,6 +2,7 @@
 
 #include "demul.h"
 #include "thread.h"
+#include "common.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -45,6 +46,7 @@ int master_main()
 
 	//------ init master thread ----------------------
 	listenfd = socket(AF_INET, SOCK_STREAM, 0);
+	setnonblocking(listenfd);
 	//mmm:should check, see sm_bak net.c
 
 	bzero(&hostaddr, sizeof(hostaddr));
@@ -74,17 +76,11 @@ int master_main()
 
 	rrid = 0;
 
-
-	printf("&&&&&&&&&lock!!!!&&&&&&&\n");
-	for(i=0;i<wts->size;i++)	{
-		printf("pl=%d\n", &wts->threads[i]->cq->lock);
-	}
-
 	//mmm:set events each round???
 	while(1)	{	
 		nfired = demul_poll(demulfd, (void*)events, 1, -1);
 
-		printf("nfired = %d, e.events = %d, e.data.fd=%d\n", nfired, events->events, events->data.fd);
+		//printf("nfired = %d, e.events = %d, e.data.fd=%d\n", nfired, events->events, events->data.fd);
 
 		for(i=0;i<nfired;i++)	{
 			if(events[i].data.fd == listenfd)	{
@@ -95,6 +91,7 @@ int master_main()
 				if(acceptfd == -1)	{
 					perror("error while accepting(master thread)");
 				}
+				setnonblocking(acceptfd);	//check null!
 
 				//dispatch to worker thread
 				printf("rrid = %d\n", rrid%wts->size);
@@ -103,11 +100,10 @@ int master_main()
 				//push conn
 				c = (conn*)malloc(sizeof(conn));
 				c->fd = acceptfd;
-				printf("accepted!!!, accfd=%d,lockq=%d\n",acceptfd, &wt->cq->lock);
+				//printf("accepted!!!, accfd=%d,lockq=%d\n",acceptfd, &wt->cq->lock);
 				conn_queue_push(wt->cq, c);
 
 				//notify
-				printf("conn pushed\n");
 				if(write(wt->notify_pipe_send, "", 1) != 1)	{
 					perror("writing to pipe failed!");
 				}

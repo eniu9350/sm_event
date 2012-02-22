@@ -3,6 +3,8 @@
 
 #include <pthread.h>
 
+#include "common.h"
+
 /*------ thread utilities ---------------------------------*/
 typedef struct conn{
 	int fd;
@@ -27,6 +29,7 @@ typedef struct {
 	conn_queue* cq;
 	int notify_pipe_send;
 	int notify_pipe_receive;
+	msg_buf* buf_cli;	//cient buf
 } worker_thread;
 
 typedef struct {
