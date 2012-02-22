@@ -30,6 +30,7 @@ worker_thread* worker_thread_create(int id)
 	wt->notify_pipe_receive = pipefd[0];
 
 	wt->buf_cli = msg_buf_create(10*1000);//ok?
+	printf("init->bufsize=%d\n", wt->buf_cli->size);
 
 	return wt;
 }
@@ -58,7 +59,7 @@ void worker_thread_cb_newconn(void* thisthread)
 
 
 	demulfd = demul_init(100);
-	setnonblocking(demulfd);
+	//setnonblocking(demulfd);
 	demul_add_event(demulfd, c->fd, EPOLLIN | EPOLLET);
 
 	events = (struct epoll_event*)malloc(1*sizeof(struct epoll_event));

@@ -51,7 +51,7 @@ int master_main()
 
 	bzero(&hostaddr, sizeof(hostaddr));
 	hostaddr.sin_family = AF_INET;
-	hostaddr.sin_port = htons(555);
+	hostaddr.sin_port = htons(554);
 	hostaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if(bind(listenfd, (struct sockaddr*)&hostaddr, sizeof(hostaddr)) == -1)	{
@@ -91,7 +91,7 @@ int master_main()
 				if(acceptfd == -1)	{
 					perror("error while accepting(master thread)");
 				}
-				setnonblocking(acceptfd);	//check null!
+				setnonblocking(acceptfd);	//mmm:VIP!!! //check null!
 
 				//dispatch to worker thread
 				printf("rrid = %d\n", rrid%wts->size);

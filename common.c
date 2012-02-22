@@ -3,12 +3,35 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+str* str_create(int len)
+{
+	str* s = (str*)malloc(sizeof(str));
+	s->s = (char*)malloc(len*sizeof(char));
+	s->len = len;
+	return s;
+}
+
+void str_show(str* s)
+{
+	int i;
+	for(i=0;i<s->len;i++)	{
+		putchar(s->s[i]);
+	}
+	putchar('\n');
+}
+
 msg_buf* msg_buf_create(int size)
 {
 	msg_buf* buf;
+	if(size<1)	{
+		perror("msg_buf_create init size should be 1 at least");
+		return NULL;
+	}
 	buf = (msg_buf*)malloc(sizeof(msg_buf));
 	buf->size = size;
 	buf->data = (char*)malloc(size*sizeof(char));
+	buf->start = 0;
+	buf->end = 0;
 	return buf;
 }
 
