@@ -49,7 +49,7 @@ int master_main()
 
 	bzero(&hostaddr, sizeof(hostaddr));
 	hostaddr.sin_family = AF_INET;
-	hostaddr.sin_port = htons(554);
+	hostaddr.sin_port = htons(555);
 	hostaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	if(bind(listenfd, (struct sockaddr*)&hostaddr, sizeof(hostaddr)) == -1)	{
@@ -106,6 +106,7 @@ int master_main()
 				printf("accepted!!!, accfd=%d,lockq=%d\n",acceptfd, &wt->cq->lock);
 				conn_queue_push(wt->cq, c);
 
+				//notify
 				printf("conn pushed\n");
 				if(write(wt->notify_pipe_send, "", 1) != 1)	{
 					perror("writing to pipe failed!");
