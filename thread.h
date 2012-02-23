@@ -4,29 +4,15 @@
 #include <pthread.h>
 
 #include "common.h"
+#include "connection.h"
 
-/*------ thread utilities ---------------------------------*/
-typedef struct conn{
-	int fd;
-	struct conn* next;
-} conn;
-
-typedef struct {
-	conn* head;
-	conn* tail;
-	pthread_mutex_t lock;
-} conn_queue;
-
-conn_queue* conn_queue_init();
-
-int conn_queue_push(conn_queue* cq, conn* c);
-conn* conn_queue_pop(conn_queue* cq);
+typedef struct conn_queue conn_queue;	//mmm: redeclared, ok?
 
 /*------ worker thread related ----------------------------*/
 typedef struct {
 	int id;	//configured manually
 	pthread_t t;
-	conn_queue* cq;
+	conn_queue* cq;	//mmm: must use struct! why?
 	int notify_pipe_send;
 	int notify_pipe_receive;
 	msg_buf* buf_cli;	//cient buf

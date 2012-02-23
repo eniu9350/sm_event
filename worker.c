@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <sys/epoll.h>
 
+#include "connection.h"
 #include "common.h"
 #include "decoder_rtsp.h"
 
@@ -131,7 +132,6 @@ static void* worker_main(void* arg)
 			if(events[i].data.fd == wt->notify_pipe_receive)	{
 				printf("notification received!\n");
 				worker_thread_cb_newconn(wt);
-
 			}
 			else	{
 

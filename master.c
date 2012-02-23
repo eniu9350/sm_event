@@ -3,6 +3,7 @@
 #include "demul.h"
 #include "thread.h"
 #include "common.h"
+#include "connection.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
