@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //only for worker_thread use!
 msg_rtsp* decode(worker_thread* wt, int fd, msg_buf* buf)

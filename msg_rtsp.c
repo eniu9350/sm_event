@@ -1,5 +1,7 @@
 #include "msg_rtsp.h"
 
+#include <stdio.h>
+#include <string.h>
 
 void msg_rtsp_show(msg_rtsp* msg)
 {
