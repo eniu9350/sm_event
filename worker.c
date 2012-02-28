@@ -73,7 +73,7 @@ void worker_thread_cb_newconn(void* thisthread)
 		for(i=0;i<nfired;i++)	{
 			if(events[i].data.fd == c->fd)	{
 				printf("events!!!\n");
-				decode(wt, c->fd, wt->buf_cli);	
+				//decode(wt, c->fd, wt->buf_cli);	
 			}
 		}
 	}

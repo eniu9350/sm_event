@@ -106,7 +106,7 @@ int master_main()
 				c->client = CONN_SERVER;
 				c->fd = acceptfd;
 				//c->handle = ((void*)(struct worker_thread*, int, msg_buf*))decode;
-				c->handle = decode;
+				c->handle = decode_rtsp;
 				//printf("accepted!!!, accfd=%d,lockq=%d\n",acceptfd, &wt->cq->lock);
 				conn_queue_push(wt->cq, c);
 

@@ -13,7 +13,7 @@ conn* conn_init()
 	c->longconn = CONN_LONG;
 	c->client = CONN_SERVER;
 
-	c->fd = NULL;
+	c->fd = 0;
 
 	c->buf = msg_buf_create(64000);//mmm: ok?
 

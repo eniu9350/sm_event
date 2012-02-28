@@ -7,7 +7,7 @@
 #include <string.h>
 
 //only for worker_thread use!
-msg_rtsp* decode(worker_thread* wt, int fd, msg_buf* buf)
+msg_rtsp* decode_rtsp(worker_thread* wt, int fd, msg_buf* buf)
 {
 	msg_rtsp* msg;
 	char* s;
