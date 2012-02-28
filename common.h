@@ -16,6 +16,8 @@ typedef struct msg_buf	{
 
 str* str_create(int len);
 void str_show(str* s);
+
 msg_buf* msg_buf_create(int size);
+
 void setnonblocking(int sockfd);
 #endif

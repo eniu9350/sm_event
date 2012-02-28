@@ -4,6 +4,7 @@
 #include "thread.h"
 #include "common.h"
 #include "connection.h"
+#include "decoder_rtsp.h"
 
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -99,8 +100,13 @@ int master_main()
 				wt = wts->threads[rrid%wts->size];
 
 				//push conn
-				c = (conn*)malloc(sizeof(conn));
+				c = conn_init();
+				c->type = CONN_TYPE_TCP;
+				c->longconn = CONN_LONG;
+				c->client = CONN_SERVER;
 				c->fd = acceptfd;
+				//c->handle = ((void*)(struct worker_thread*, int, msg_buf*))decode;
+				c->handle = decode;
 				//printf("accepted!!!, accfd=%d,lockq=%d\n",acceptfd, &wt->cq->lock);
 				conn_queue_push(wt->cq, c);
 

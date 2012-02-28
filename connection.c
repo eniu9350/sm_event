@@ -3,8 +3,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*------ connection operations ---------------------------------*/
+conn* conn_init()
+{
+	conn* c;
+	c = (conn*)malloc(sizeof(conn));
 
-/*------ connection utilities ---------------------------------*/
+	c->type = CONN_TYPE_TCP;
+	c->longconn = CONN_LONG;
+	c->client = CONN_SERVER;
+
+	c->fd = NULL;
+
+	c->buf = msg_buf_create(64000);//mmm: ok?
+
+	return c;
+}
+
+/*------ connection queue operations ---------------------------------*/
 conn_queue* conn_queue_init()
 {
 	conn_queue* cq = (conn_queue*)malloc(sizeof(conn_queue));

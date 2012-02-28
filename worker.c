@@ -58,7 +58,7 @@ void worker_thread_cb_newconn(void* thisthread)
 
 	c = conn_queue_pop(wt->cq);
 
-	(*(c->handle))(wt, NULL);
+	(*(c->handle))(wt, c->fd, c->buf);
 
 
 	demulfd = demul_init(100);

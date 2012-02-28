@@ -29,7 +29,7 @@ typedef struct conn{
 	//---- important stuff
 	int fd;
 	msg_buf* buf;	
-	void (*handle)(struct worker_thread* wt, struct msg_rtsp* msg);
+	void (*handle)(struct worker_thread* wt, int fd, msg_buf* buf);
 
 	struct conn* next;
 } conn;
@@ -40,8 +40,12 @@ typedef struct conn_queue{
 	pthread_mutex_t lock;
 } conn_queue;
 
-conn_queue* conn_queue_init();
+/*------ connection operations ---------------------------------*/
+conn* conn_init();
 
+
+/*------ connection queue operations ---------------------------------*/
+conn_queue* conn_queue_init();
 int conn_queue_push(conn_queue* cq, conn* c);
 conn* conn_queue_pop(conn_queue* cq);
 
