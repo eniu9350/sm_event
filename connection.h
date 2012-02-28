@@ -4,7 +4,7 @@
 #include <pthread.h>
 
 #include "common.h"
-#include "thread.h"
+//#include "thread.h"
 #include "msg_rtsp.h"
 
 #define CONN_TYPE_TCP 1

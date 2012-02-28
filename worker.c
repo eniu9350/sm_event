@@ -58,6 +58,8 @@ void worker_thread_cb_newconn(void* thisthread)
 
 	c = conn_queue_pop(wt->cq);
 
+	(*(c->handle))(wt, NULL);
+
 
 	demulfd = demul_init(100);
 	//setnonblocking(demulfd);

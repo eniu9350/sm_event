@@ -9,7 +9,7 @@
 typedef struct conn_queue conn_queue;	//mmm: redeclared, ok?
 
 /*------ worker thread related ----------------------------*/
-typedef struct {
+typedef struct worker_thread{
 	int id;	//configured manually
 	pthread_t t;
 	conn_queue* cq;	//mmm: must use struct! why?
