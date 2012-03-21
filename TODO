@@ -1,6 +1,9 @@
 ===0228===
 how to incorporate callback func pointer into events by encapsulation	//see libevent
+diff of various kinds of worker threads
 
 
 bug :toread = abnormal number
+
+
 
